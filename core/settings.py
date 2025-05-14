@@ -27,11 +27,13 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "django_filters",
+    "django_celery_beat",
     "drf_spectacular",
     "drf_spectacular_sidecar",
     "drf_standardized_errors",
     "rest_framework",
     "whitenoise.runserver_nostatic",
+    "apps.task_manager",
 ]
 
 MIDDLEWARE = [
@@ -136,4 +138,4 @@ SPECTACULAR_SETTINGS = {
     }""",
 }
 
-CELERY_BROKER_URL = settings.redis_url
+CELERY_BROKER_URL = settings.CELERY_BROKER_URL

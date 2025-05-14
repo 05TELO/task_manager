@@ -5,11 +5,18 @@ from rest_framework.views import APIView
 
 
 class HealthCheckView(APIView):
-    """Проверка доступности сервиса."""
-
     authentication_classes = ()
     permission_classes = (AllowAny,)
 
     def get(self, request: Request) -> Response:
-        """Проверка доступности сервиса."""
         return Response(status=200)
+
+
+class BaseAPIView:
+    def get_serializer(self, *args, **kwargs):
+        """Choose serializer depending on request method."""
+        method = self.request.method
+        default = self.serializer_classes.get("GET")
+        serializer_class = self.serializer_classes.get(method, default)
+        kwargs["context"] = self.get_serializer_context()
+        return serializer_class(*args, **kwargs)

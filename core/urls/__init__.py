@@ -4,6 +4,8 @@ from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 
 from core.views import HealthCheckView
 
+from .v1 import urls_v1
+
 urlpatterns = [
     # Django
     path("admin/", admin.site.urls),
@@ -18,6 +20,7 @@ urlpatterns = [
         "api/",
         include(
             [
+                path("v1/", include((urls_v1, "v1"), namespace="v1")),
                 path("health", HealthCheckView.as_view(), name="healthcheck"),
             ]
         ),
