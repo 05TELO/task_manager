@@ -34,3 +34,9 @@ migrate: # Migrate database
 
 test: # Run tests
 	docker compose -f docker/compose.yml --project-directory . run --rm api pytest .
+
+.PHONY: create-tasks
+
+create-tasks:
+	@echo "Creating tasks for Telegram User ID: $(TELEGRAM_USER_ID)"
+	docker compose -f docker/compose.yml --project-directory . run --rm api python manage.py create_tasks $(TELEGRAM_USER_ID)

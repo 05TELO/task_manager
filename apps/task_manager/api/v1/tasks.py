@@ -56,9 +56,13 @@ def check_due_tasks() -> str:
     )
 
     for task in due_tasks:
+        deadline_local = timezone.localtime(
+            task.deadline, timezone=timezone.get_current_timezone()
+        )
+
         send_single_message.delay(
             chat_id=task.telegram_user_id,
             message=f'⏰ Срок выполнения задачи "{task.title}"'
-            f" истекает в {task.deadline.strftime('%H:%M')}!",
+            f" истекает в {deadline_local.strftime('%H:%M')}!",
         )
     return "Done"

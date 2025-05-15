@@ -20,8 +20,8 @@
 
 ### 1. Склонируйте репозиторий:
 ```bash
-git clone git@github.com:05TELO/leaf33.git
-cd leaf33
+git clone git@github.com:05TELO/task_manager.git
+cd task_manager
 ```
 
 ### 2. Создайте `.env` файл:
@@ -58,7 +58,10 @@ make test
 ## 🌐 Функционал приложения
 
 - **[http://localhost:80](http://localhost:80)** — документация API.
-
+- Для заполнения базы тестовыми данными нужно выполнить коменду
+```bash
+make create-tasks TELEGRAM_USER_ID=<Ваш Telegram ID>
+```
 
 ---
 
