@@ -23,6 +23,13 @@ dependencies = [
     "pendulum>=3.1.0",
 ]
 
+[project.optional-dependencies]
+dev = [
+    "factory-boy>=3.3.3",
+    "pytest>=8.3.5",
+    "pytest-django>=4.11.1",
+]
+
 
 [tool.ruff]
 # Exclude a variety of commonly ignored directories.
@@ -104,7 +111,7 @@ ignore = [
     "D203", # 1 blank line required before class docstring
     "D213", # Multi-line docstring summary should start at the second line
     "RUF001", # String contains cyrillic
-
+    "S101", # Use of `assert` detected
 ]
 
 # Allow fix for all enabled rules (when `--fix`) is provided.
@@ -132,3 +139,16 @@ line-ending = "auto"
 "**/{tests,docs,tools}/*" = ["E402"]
 "migrations/**.py" = ["E501"]   # line length
 "tests.py" = ["S101"]  # use of `assert`
+
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "core.settings"
+cache_dir = ".artifacts/pytest/"
+python_files = [
+    "tests.py",
+    "test_*.py",
+    "*_tests.py"
+]
+filterwarnings = [
+    "ignore::DeprecationWarning",
+]
+

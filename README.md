@@ -50,7 +50,7 @@ make build && make up
 Выполните команду:
 
 ```bash
-docker compose run --remove-orphans app pytest .
+make test
 ```
 
 ---

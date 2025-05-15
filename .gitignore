@@ -12,6 +12,7 @@ wheels/
 **/static
 **/staticfiles
 **/**.sql
+.artifacts
 
 # GIT
 **/.git
