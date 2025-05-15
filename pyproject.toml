@@ -150,5 +150,6 @@ python_files = [
 ]
 filterwarnings = [
     "ignore::DeprecationWarning",
+    "ignore::UserWarning:django.core.handlers.base",
 ]
 
