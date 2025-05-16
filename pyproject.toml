@@ -8,7 +8,7 @@ dependencies = [
     "httpx>=0.28.1",
 ]  
 [dependency-groups]
-django =  [
+django = [
     "django-filter>=25.1",
     "django>=5.1.7",
     "djangorestframework>=3.15.2",
@@ -25,14 +25,16 @@ django =  [
 ]
 dev = [
     "factory-boy>=3.3.3",
+    "pytest-mock>=3.14.0",
     "pytest>=8.3.5",
     "pytest-django>=4.11.1",
+    "pytest-cov>=6.1.1",
 ]
 bot = [
     "aiogram>=3.20.0.post0",
     "pendulum>=3.1.0",
     "dotenv>=0.9.9",
-] 
+]
 
 [tool.ruff]
 # Exclude a variety of commonly ignored directories.
@@ -143,7 +145,31 @@ line-ending = "auto"
 "migrations/**.py" = ["E501"]   # line length
 "tests.py" = ["S101"]  # use of `assert`
 
+[tool.coverage.run]
+omit = [
+    "*/migrations/*",
+    "*/tests/*",
+    "*/__init__.py",
+    "*/admin.py",
+    "*/apps.py",
+    "*/manage.py",
+    "*/settings.py",
+    "*/urls.py",
+    "*/wsgi.py",
+    "*/asgi.py",
+]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "raise NotImplementedError",
+    "os.environ.setdefault",
+    "import",
+]
+
 [tool.pytest.ini_options]
+addopts = "--cov=. --cov-report=term"
 DJANGO_SETTINGS_MODULE = "core.settings"
 cache_dir = ".artifacts/pytest/"
 python_files = [
@@ -155,4 +181,3 @@ filterwarnings = [
     "ignore::DeprecationWarning",
     "ignore::UserWarning:django.core.handlers.base",
 ]
-

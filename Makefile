@@ -33,7 +33,7 @@ migrate: # Migrate database
 	docker compose -f docker/compose.yml --project-directory . exec api python manage.py migrate
 
 test: # Run tests
-	docker compose -f docker/compose.yml --project-directory . run --rm api pytest .
+	docker compose -f docker/compose.yml --project-directory . run --rm api pytest
 
 .PHONY: create-tasks
 

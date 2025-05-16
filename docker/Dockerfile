@@ -3,7 +3,7 @@ FROM python:3.13-slim AS builder
 COPY --from=ghcr.io/astral-sh/uv:latest /uv /bin/uv
 
 COPY ./pyproject.toml /pyproject.toml
-RUN uv pip compile /pyproject.toml --group django --group dev -o /requirements.txt
+RUN uv pip compile /pyproject.toml --extra django --extra dev -o /requirements.txt
 
 FROM python:3.13-alpine
 
@@ -29,8 +29,9 @@ COPY --from=builder /requirements.txt /app/requirements.txt
 
 RUN pip install --no-cache-dir -r requirements.txt
 
-COPY . /app
-
+COPY ./apps /app/apps
+COPY ./core /app/core
+COPY manage.py conftest.py pyproject.toml /app/
 RUN chown -R appuser:appuser /app
 USER appuser
 
