@@ -5,6 +5,10 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
+    "httpx>=0.28.1",
+]  
+[dependency-groups]
+django =  [
     "django-filter>=25.1",
     "django>=5.1.7",
     "djangorestframework>=3.15.2",
@@ -18,18 +22,17 @@ dependencies = [
     "psycopg2-binary>=2.9.10",
     "dj-database-url>=2.3.0",
     "whitenoise>=6.9.0",
-    "httpx>=0.28.1",
-    "aiogram>=3.20.0.post0",
-    "pendulum>=3.1.0",
 ]
-
-[project.optional-dependencies]
 dev = [
     "factory-boy>=3.3.3",
     "pytest>=8.3.5",
     "pytest-django>=4.11.1",
 ]
-
+bot = [
+    "aiogram>=3.20.0.post0",
+    "pendulum>=3.1.0",
+    "dotenv>=0.9.9",
+] 
 
 [tool.ruff]
 # Exclude a variety of commonly ignored directories.

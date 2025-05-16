@@ -324,6 +324,17 @@ wheels = [
 ]
 
 [[package]]
+name = "dotenv"
+version = "0.9.9"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "python-dotenv" },
+]
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/b2/b7/545d2c10c1fc15e48653c91efde329a790f2eecfbbf2bd16003b5db2bab0/dotenv-0.9.9-py2.py3-none-any.whl", hash = "sha256:29cf74a087b31dafdb5a446b6d7e11cbce8ed2741540e2339c69fbef92c94ce9", size = 1892 },
+]
+
+[[package]]
 name = "drf-spectacular"
 version = "0.28.0"
 source = { registry = "https://pypi.org/simple" }
@@ -942,8 +953,21 @@ wheels = [
 name = "task-manager"
 version = "0.1.0"
 source = { virtual = "." }
-dependencies = [
+
+[package.optional-dependencies]
+bot = [
     { name = "aiogram" },
+    { name = "pendulum" },
+]
+core = [
+    { name = "httpx" },
+]
+dev = [
+    { name = "factory-boy" },
+    { name = "pytest" },
+    { name = "pytest-django" },
+]
+django = [
     { name = "celery", extra = ["redis"] },
     { name = "dj-database-url" },
     { name = "django" },
@@ -954,46 +978,41 @@ dependencies = [
     { name = "drf-spectacular-sidecar" },
     { name = "drf-standardized-errors" },
     { name = "gunicorn" },
-    { name = "httpx" },
-    { name = "pendulum" },
     { name = "psycopg2-binary" },
     { name = "pydantic-settings" },
     { name = "whitenoise" },
 ]
 
 [package.dev-dependencies]
-dev = [
-    { name = "factory-boy" },
-    { name = "pytest" },
-    { name = "pytest-django" },
+bot = [
+    { name = "dotenv" },
 ]
 
 [package.metadata]
 requires-dist = [
-    { name = "aiogram", specifier = ">=3.20.0.post0" },
-    { name = "celery", extras = ["redis"], specifier = ">=5.4.0" },
-    { name = "dj-database-url", specifier = ">=2.3.0" },
-    { name = "django", specifier = ">=5.1.7" },
-    { name = "django-celery-beat", specifier = ">=2.7.0" },
-    { name = "django-filter", specifier = ">=25.1" },
-    { name = "djangorestframework", specifier = ">=3.15.2" },
-    { name = "drf-spectacular", specifier = ">=0.28.0" },
-    { name = "drf-spectacular-sidecar", specifier = ">=2025.3.1" },
-    { name = "drf-standardized-errors", specifier = ">=0.14.1" },
-    { name = "gunicorn", specifier = ">=23.0.0" },
-    { name = "httpx", specifier = ">=0.28.1" },
-    { name = "pendulum", specifier = ">=3.1.0" },
-    { name = "psycopg2-binary", specifier = ">=2.9.10" },
-    { name = "pydantic-settings", specifier = ">=2.8.1" },
-    { name = "whitenoise", specifier = ">=6.9.0" },
+    { name = "aiogram", marker = "extra == 'bot'", specifier = ">=3.20.0.post0" },
+    { name = "celery", extras = ["redis"], marker = "extra == 'django'", specifier = ">=5.4.0" },
+    { name = "dj-database-url", marker = "extra == 'django'", specifier = ">=2.3.0" },
+    { name = "django", marker = "extra == 'django'", specifier = ">=5.1.7" },
+    { name = "django-celery-beat", marker = "extra == 'django'", specifier = ">=2.7.0" },
+    { name = "django-filter", marker = "extra == 'django'", specifier = ">=25.1" },
+    { name = "djangorestframework", marker = "extra == 'django'", specifier = ">=3.15.2" },
+    { name = "drf-spectacular", marker = "extra == 'django'", specifier = ">=0.28.0" },
+    { name = "drf-spectacular-sidecar", marker = "extra == 'django'", specifier = ">=2025.3.1" },
+    { name = "drf-standardized-errors", marker = "extra == 'django'", specifier = ">=0.14.1" },
+    { name = "factory-boy", marker = "extra == 'dev'", specifier = ">=3.3.3" },
+    { name = "gunicorn", marker = "extra == 'django'", specifier = ">=23.0.0" },
+    { name = "httpx", marker = "extra == 'core'", specifier = ">=0.28.1" },
+    { name = "pendulum", marker = "extra == 'bot'", specifier = ">=3.1.0" },
+    { name = "psycopg2-binary", marker = "extra == 'django'", specifier = ">=2.9.10" },
+    { name = "pydantic-settings", marker = "extra == 'django'", specifier = ">=2.8.1" },
+    { name = "pytest", marker = "extra == 'dev'", specifier = ">=8.3.5" },
+    { name = "pytest-django", marker = "extra == 'dev'", specifier = ">=4.11.1" },
+    { name = "whitenoise", marker = "extra == 'django'", specifier = ">=6.9.0" },
 ]
 
 [package.metadata.requires-dev]
-dev = [
-    { name = "factory-boy", specifier = ">=3.3.3" },
-    { name = "pytest", specifier = ">=8.3.5" },
-    { name = "pytest-django", specifier = ">=4.11.1" },
-]
+bot = [{ name = "dotenv", specifier = ">=0.9.9" }]
 
 [[package]]
 name = "typing-extensions"

@@ -3,7 +3,7 @@ FROM python:3.13-slim AS builder
 COPY --from=ghcr.io/astral-sh/uv:latest /uv /bin/uv
 
 COPY ./pyproject.toml /pyproject.toml
-RUN uv pip compile --all-extras /pyproject.toml -o /requirements.txt
+RUN uv pip compile /pyproject.toml --group django --group dev -o /requirements.txt
 
 FROM python:3.13-alpine
 
