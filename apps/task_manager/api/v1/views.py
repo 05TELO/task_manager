@@ -1,3 +1,4 @@
+from typing import ClassVar
 from drf_spectacular.utils import OpenApiParameter, extend_schema, extend_schema_view
 from rest_framework import filters, generics
 from rest_framework.permissions import AllowAny
@@ -25,7 +26,7 @@ class TaskListCreateView(BaseAPIView, generics.ListCreateAPIView):
     queryset = Task.objects.all()
     serializer_class = TaskSerializer
     permission_classes = (AllowAny,)
-    serializer_classes = {  # noqa: RUF012
+    serializer_classes: ClassVar[dict[str, type[object]]] = {
         "GET": TaskSerializer,
         "PATCH": TaskCreateSerializer,
     }
@@ -44,7 +45,7 @@ class TaskRetrieveUpdateView(BaseAPIView, generics.RetrieveUpdateAPIView):
     queryset = Task.objects.all()
     permission_classes = (AllowAny,)
     http_method_names = ("get", "patch")
-    serializer_classes = {  # noqa: RUF012
+    serializer_classes: ClassVar[dict[str, type[object]]] = {
         "GET": TaskSerializer,
         "PATCH": TaskUpdateSerializer,
     }

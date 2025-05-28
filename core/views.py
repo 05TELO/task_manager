@@ -1,3 +1,5 @@
+from typing import ClassVar
+
 from rest_framework.permissions import AllowAny
 from rest_framework.request import Request
 from rest_framework.response import Response
@@ -13,6 +15,8 @@ class HealthCheckView(APIView):
 
 
 class BaseAPIView:
+    serializer_classes: ClassVar[dict[str, type[object]]] = {}
+
     def get_serializer(self, *args, **kwargs):
         """Choose serializer depending on request method."""
         method = self.request.method
